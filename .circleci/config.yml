@@ -5,5 +5,41 @@ jobs:
       - image: circleci/node:6-browsers
     steps:
       - checkout
+   
       - run:
-          echo "Set up successful"
+        name: Show current Branch
+        command: echo ${CIRCLE_BRANCH}
+      
+      - restore_cache:
+          keys: 
+            - v1-dependencies-{{ checksum "package.json" }}        
+            - v1-dependencies-
+            
+      - run:    
+          name: Install local dependencies    
+          command: npm install
+      
+      - save_cache:    
+          key: v1-dependencies-{{ checksum "package.json" }}    
+          paths:     
+            - node_modules
+            
+      - run:    
+          name: Linting   
+          command: npm run lint
+      
+      - run:    
+          name: Testing    
+          command: npm run test
+      
+      - run:    
+          name: Building    
+          command: |        
+                   if [ "${CIRCLE_BRANCH}" == "staging" ]; then           
+                      npm run build-qa        
+                   elif [ "${CIRCLE_BRANCH}" == "master" ]; then            
+                      npm run build-prod        
+                   else           
+                      npm run build-dev        
+                   fi
+      
