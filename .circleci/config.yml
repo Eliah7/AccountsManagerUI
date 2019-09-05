@@ -5,4 +5,4 @@ jobs:
       - image: circleci/node:6-browsers
     steps:
       - checkout
-      - echo "Set up successful"
+      echo "Set up successful"
