@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "build-dev": "ng build --target=development --environment=dev",
     "build-qa": "ng build --target=production --environment=qa",
-    "build-prod": "ng build --prod",
+    "build-prod": "ng build --prod"
   },
   "private": true,
   "dependencies": {
