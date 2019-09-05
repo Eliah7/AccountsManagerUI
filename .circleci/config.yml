@@ -7,8 +7,8 @@ jobs:
       - checkout
    
       - run:
-        name: Show current Branch
-        command: echo ${CIRCLE_BRANCH}
+          name: Show current Branch
+          command: echo ${CIRCLE_BRANCH}
       
       - restore_cache:
           keys: 
